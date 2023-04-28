@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Repository;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Models.Identity;
 using OnlineShop.ViewModels;
 
 namespace OnlineShop.Controllers;
@@ -7,11 +8,12 @@ namespace OnlineShop.Controllers;
 public class RegisterController : Controller
 {
     //
-    private readonly IRegisterRepository _repository;
+    private readonly UserManager<CustomUser> _userManager;
 
-    public RegisterController(IRegisterRepository repository)
+
+    public RegisterController(UserManager<CustomUser> userManager)
     {
-        _repository = repository;
+         _userManager = userManager;
     }
 
     //
@@ -23,29 +25,41 @@ public class RegisterController : Controller
 
 
     [HttpPost]
-    public IActionResult Index(RegisterViewModel registerViewModel) 
+    public async Task<IActionResult> Index(RegisterViewModel registerViewModel) 
     {
-        if(ModelState.IsValid) 
+        
+        if (ModelState.IsValid) 
         {
-            //user vailid
-            string email = registerViewModel.Email;
-            if (_repository.GetByEmail(email)!= null) 
+
+            var result = await _userManager.CreateAsync(registerViewModel, registerViewModel.Password);
+
+            if (result.Succeeded)
             {
-                ModelState.AddModelError("", "Error, Email already in exist.");
-                return View(registerViewModel);
+                Console.WriteLine("lol");
+                return RedirectToAction("Success", "Register");
             }
             else
             {
-                _repository.AddUser(registerViewModel);
-                return RedirectToAction("Success");
+                foreach(var error in result.Errors)
+                {
+                    //Console.WriteLine(errors);
+                    ModelState.AddModelError("", error.Description);
+                }
+                    
             }
-            
 
         }
         return View(registerViewModel);
     }
+
+
+
+
+
+
     public IActionResult Success()
     {
         return View();
     }
+    public IActionResult Error() { return View(); }
 }

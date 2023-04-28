@@ -12,8 +12,8 @@ using OnlineShop.Contexts;
 namespace OnlineShop.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20230426071643_Init 2")]
-    partial class Init2
+    [Migration("20230428092832_firstInit")]
+    partial class firstInit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

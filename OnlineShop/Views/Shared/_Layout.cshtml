@@ -8,7 +8,15 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
-    
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="">
+                Custom User
+            </div>
+            <a asp-action="Index" asp-controller="Register" class="m-2">Register</a>
+            <a asp-action="Index" asp-controller="Login" class="m-2">Login</a>
+        </div>
+    </div>
     
     @RenderBody()
   

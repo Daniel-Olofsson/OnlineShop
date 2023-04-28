@@ -2,8 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Contexts;
 using OnlineShop.Models.Identity;
-using OnlineShop.Repository;
-using OnlineShop.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -14,10 +13,12 @@ builder.Services.AddIdentity<CustomUser, IdentityRole>(x =>
     x.SignIn.RequireConfirmedAccount = false;
     x.User.RequireUniqueEmail = true;
     x.Password.RequiredLength = 8;
-    
+    //x.Password.RequireUppercase = false;
+    x.Password.RequireNonAlphanumeric = false;
+
 
 }).AddEntityFrameworkStores<IdentityContext>();
-builder.Services.AddScoped<IRegisterRepository, RegisterService>();
+
 //
 var app = builder.Build();
 app.UseHsts();
