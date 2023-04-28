@@ -1,0 +1,16 @@
+﻿
+@if (_signInManager.IsSignedIn(User))
+{
+    <nav>
+        <span class="me-4">@User.Identity?.Name</span>
+        <a asp-action="Index" asp-controller="Register" class="m-2">Profile</a>
+        <a asp-action="Index" asp-controller="Logout" class="m-2">Logout</a>
+    </nav>
+}
+else
+{
+    <nav>
+        <a asp-action="Index" asp-controller="Register" class="m-2">Register</a>
+        <a asp-action="Index" asp-controller="Login" class="m-2">Login</a>
+    </nav>
+}

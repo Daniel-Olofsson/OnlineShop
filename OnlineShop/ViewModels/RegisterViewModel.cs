@@ -26,18 +26,18 @@ public class RegisterViewModel
 
     [Display(Name = "Email")]
     [Required(ErrorMessage = "Email is required")]
-    //[EmailAddress(ErrorMessage = "Invalid email format")]
+    [EmailAddress(ErrorMessage = "Invalid email format")]
     [DataType(DataType.EmailAddress)]
     public string Email { get; set; }
 
     [Display(Name = "Phone Number")]
-    //[Phone(ErrorMessage = "Invalid phone number format")]
+    [Phone(ErrorMessage = "Invalid phone number format")]
     public string? PhoneNumber { get; set; }
 
     [Display(Name = "Password")]
     [Required(ErrorMessage = "Password is required")]
-    //[MinLength(8, ErrorMessage = "Password must be at least 8 characters long")]
-    //[RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", ErrorMessage = "Password must contain at least one letter and one number")]
+    [MinLength(8, ErrorMessage = "Password must be at least 8 characters long")]
+    [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", ErrorMessage = "Password must contain at least one letter and one number")]
     [DataType(DataType.Password)]
     public string Password { get; set; }
 
@@ -52,8 +52,8 @@ public class RegisterViewModel
     [Display(Name = "City")]
     public string? City { get; set; }
     [Display(Name = "Postal code")]
-    //[Required(ErrorMessage = "Postal code is required")]
-    //[RegularExpression(@"^\d{5,6}$", ErrorMessage = "Postal code must be 6-8 digits")]
+    [Required(ErrorMessage = "Postal code is required")]
+    [RegularExpression(@"^\d{5,6}$", ErrorMessage = "Postal code must be 6-8 digits")]
     public string? PostalCode { get; set; }
 
     public static implicit operator CustomUser(RegisterViewModel model)

@@ -36,7 +36,7 @@ public class RegisterController : Controller
             if (result.Succeeded)
             {
                 Console.WriteLine("lol");
-                return RedirectToAction("Success", "Register");
+                return RedirectToAction("Index", "Login");
             }
             else
             {
